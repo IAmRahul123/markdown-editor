@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.post('/convert', (req, res) => {
     console.log("reqqq",req)
   const markdownText = req.body.markdown;
-  const html = marked(markdownText);
+  const html = marked.parse(markdownText);
   res.send({ html });
 });
 
