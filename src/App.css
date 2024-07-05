@@ -23,6 +23,12 @@ textarea {
   padding: 0px 10px;
 }
 
+.switch-container{
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  gap: 5px;
+}
 @media (max-width: 768px) {
   .App {
     flex-direction: column;
