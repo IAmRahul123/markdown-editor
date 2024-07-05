@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './App.css';
 
 const App = () => {
@@ -31,13 +29,9 @@ const App = () => {
         placeholder="Type your markdown here..."
       />
       <div
+        className="preview"
         dangerouslySetInnerHTML={{ __html: html }}
       ></div>
-      <div className="preview">
-        <SyntaxHighlighter language="javascript" style={materialDark}>
-          {markdown}
-        </SyntaxHighlighter>
-      </div>
     </div>
   );
 }
