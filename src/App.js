@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [markdown, setMarkdown] = useState('');
+  const [html, setHtml] = useState('');
+  const API_BASE=process.env.REACT_APP_API_URL
+
+  const handleMarkdownChange = async (e) => {
+    const newMarkdown = e.target.value;
+    setMarkdown(newMarkdown);
+
+    try {
+      const response = await axios.post(`${API_BASE}convert`, {
+        markdown: newMarkdown,
+      });
+      setHtml(response.data.html);
+    } catch (error) {
+      console.error('Error converting markdown to HTML', error);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <textarea
+        value={markdown}
+        onChange={handleMarkdownChange}
+        placeholder="Type your markdown here..."
+      />
+      <div
+        dangerouslySetInnerHTML={{ __html: html }}
+      ></div>
+      <div className="preview">
+        <SyntaxHighlighter language="javascript" style={materialDark}>
+          {markdown}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 }
