@@ -13,7 +13,7 @@ Follow these steps to set up and run the application:
 
 2. Navigate to the backend folder:
 
-    cd ./backend
+    cd backend/
 
 3. Install all the necessary packages:
 
